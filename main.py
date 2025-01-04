@@ -4,14 +4,14 @@ import functions as f
 import os
 from datetime import datetime
 
-search = "love" #input("add it: ")
+search = "data science" #input("add it: ")
 language = "en"
 top = 50
 date = datetime.today().strftime('%Y-%mm-%dd')
 
 api_key = os.getenv("NEWSAPI")
 url = f"https://newsapi.org/v2/everything?q={search}&from={date}" \
-      f"&language={language}&sortBy=publishedAt&apiKey=7881f1a5c078402bb47b6f8e82a616d2"
+      f"&language={language}&sortBy=publishedAt&apiKey={api_key}"
 # make request
 myrequest = requests.get(url)
 
