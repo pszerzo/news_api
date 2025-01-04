@@ -1,10 +1,17 @@
+import datetime as datetime
 import requests
 import functions as f
 import os
+from datetime import datetime
+
+search = "love" #input("add it: ")
+language = "en"
+top = 50
+date = datetime.today().strftime('%Y-%mm-%dd')
 
 api_key = os.getenv("NEWSAPI")
-url = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=" \
-      "7881f1a5c078402bb47b6f8e82a616d2"
+url = f"https://newsapi.org/v2/everything?q={search}&from={date}" \
+      f"&language={language}&sortBy=publishedAt&apiKey=7881f1a5c078402bb47b6f8e82a616d2"
 # make request
 myrequest = requests.get(url)
 
@@ -13,6 +20,11 @@ content = myrequest.json()
 
 # send articles
 text = ""
-for article in content["articles"]:
-    text = text + "\n" + str(article["title"]) + "\n" + str(article["content"]) +"\n" *2
+for article in content["articles"][:10]:
+    if article["title"] is not None:
+        text = f"Subject: Today's {search} news" + "\n" \
+               + text \
+               + article["title"] + "\n" \
+               + article["content"] + "\n" \
+               + article["url"] + "\n" * 2
 f.send_email(text)
