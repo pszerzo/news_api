@@ -11,14 +11,8 @@ myrequest = requests.get(url)
 # get dictionary
 content = myrequest.json()
 
-# access titles
-titles = []
-contents = []
+# send articles
+text = ""
 for article in content["articles"]:
-    titles.append(article["title"])
-    contents.append(article["content"])
-
-text = titles + contents
-print(text)
-
+    text = text + "\n" + str(article["title"]) + "\n" + str(article["content"]) +"\n" *2
 f.send_email(text)

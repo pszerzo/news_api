@@ -57,6 +57,8 @@ def send_email(message, receiver="peterszerzo@gmail.com", username="peterszerzo@
     pw = os.getenv("PASSWORD")
     mycontext = ssl.create_default_context()
 
+    message = message.encode('utf-8')
+
     with smtplib.SMTP_SSL(host=host, port=port, context=mycontext) as server:
         server.login(username, pw)
         server.sendmail(username, receiver, message)
