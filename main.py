@@ -18,10 +18,7 @@ for article in content["articles"]:
     titles.append(article["title"])
     contents.append(article["content"])
 
-f.send_email(titles + contents)
+text = titles + contents
+print(text)
 
-
-    # if article["title"] == "Are You Ultrarich, Rich or Merely Affluent? It Makes a Big Difference for Your Bank":
-    #       print(article["content"])
-    #       with open("news.txt", "w") as file:
-    #             file.write(article["content"])
+f.send_email(text)
